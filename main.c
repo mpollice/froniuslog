@@ -57,13 +57,13 @@ typedef enum
     GET_MIN_AC_VOLTAGE_DAY    = 0x1C,
     GET_MAX_DC_VOLTAGE_DAY    = 0x1D,
     GET_OPERATING_HOURS_DAY   = 0x1E,
-    GET_YEILD_YEAR            = 0x1F,
+    GET_YIELD_YEAR            = 0x1F,
     GET_MAX_POWER_YEAR        = 0x20,
     GET_MAX_AC_VOLTAGE_YEAR   = 0x21,
     GET_MIN_AC_VOLTAGE_YEAR   = 0x22,
     GET_MAX_DC_VOLTAGE_YEAR   = 0x23,
     GET_OPERATING_HOURS_YEAR  = 0x24,
-    GET_YEILD_TOTAL           = 0x25,
+    GET_YIELD_TOTAL           = 0x25,
     GET_MAX_POWER_TOTAL       = 0x26,
     GET_MAX_AC_VOLTAGE_TOTAL  = 0x27,
     GET_MIN_AC_VOLTAGE_TOTAL  = 0x28,
@@ -100,13 +100,13 @@ unsigned char cmds[] =
     GET_MIN_AC_VOLTAGE_DAY    ,
     GET_MAX_DC_VOLTAGE_DAY    ,
     GET_OPERATING_HOURS_DAY   ,
-    GET_YEILD_YEAR            ,
+    GET_YIELD_YEAR            ,
     GET_MAX_POWER_YEAR        ,
     GET_MAX_AC_VOLTAGE_YEAR   ,
     GET_MIN_AC_VOLTAGE_YEAR   ,
     GET_MAX_DC_VOLTAGE_YEAR   ,
     GET_OPERATING_HOURS_YEAR  ,
-    GET_YEILD_TOTAL           ,
+    GET_YIELD_TOTAL           ,
     GET_MAX_POWER_TOTAL       ,
     GET_MAX_AC_VOLTAGE_TOTAL  ,
     GET_MIN_AC_VOLTAGE_TOTAL  ,
@@ -961,13 +961,13 @@ int main(int argc, char *argv[])
                         "MIN_AC_VOLTAGE_DAY    ,"
                         "MAX_DC_VOLTAGE_DAY    ,"
                         "OPERATING_HOURS_DAY   ,"
-                        "YEILD_YEAR            ,"
+                        "YIELD_YEAR            ,"
                         "MAX_POWER_YEAR        ,"
                         "MAX_AC_VOLTAGE_YEAR   ,"
                         "MIN_AC_VOLTAGE_YEAR   ,"
                         "MAX_DC_VOLTAGE_YEAR   ,"
                         "OPERATING_HOURS_YEAR  ,"
-                        "YEILD_TOTAL           ,"
+                        "YIELD_TOTAL           ,"
                         "MAX_POWER_TOTAL       ,"
                         "MAX_AC_VOLTAGE_TOTAL  ,"
                         "MIN_AC_VOLTAGE_TOTAL  ,"
