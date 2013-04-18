@@ -781,6 +781,7 @@ static void updateHtml(const char *dir, short *watts, int wattsCount, float ener
     FILE *f;
     char path[255];
     int i;
+    int max = 0;
     int energyNowInt = energyNow; 
     int energyDayInt = energyDay;
     struct timeval now;
@@ -806,13 +807,21 @@ static void updateHtml(const char *dir, short *watts, int wattsCount, float ener
         printf("Failed to open %s: %s\n", path, strerror(errno));
         return;
     }
+    
+    for (i = 0; i < wattsCount; i++)
+    {
+        if (watts[i] > max)
+        {
+        	max = watts[i];
+        }
+    }
 
     // Write out the current output
     fprintf(f, "<html>\n");
     fprintf(f, "Current Power:      %d W<br>\n", energyNowInt);
     fprintf(f, "Today's Power:      %d kWh<br>\n", energyDayInt/1000);
     fprintf(f, "<img src=http://chart.apis.google.com/chart?cht=lc");
-    fprintf(f, "&chxt=x,y&chxr=0,%g,%g|1,0,4000", startX, stopX);
+    fprintf(f, "&chxt=x,y&chxr=0,%g,%g|1,0,%u", startX, stopX, (max + (50 - max%50)));
     fprintf(f, "&chtt=Power+(watts)&chd=t:");
     for (i=0; i<wattsCount; i++)
     {
@@ -824,7 +833,7 @@ static void updateHtml(const char *dir, short *watts, int wattsCount, float ener
         if (i < 59)
             fprintf(f, ",");
     }
-    fprintf(f, "&chds=0,3600&chs=800x370><br>\n");
+    fprintf(f, "&chds=0,%u&chs=800x370><br>\n", (max + (50 - max%50)));
     fprintf(f, "Raw data:           <a href=data.csv>data.csv</a><br>\n");
     fprintf(f, "Last update: %02d:%02d %d-%02d-%02d<br>\n", lt->tm_hour, lt->tm_min,
             lt->tm_year+1900, lt->tm_mon+1, lt->tm_mday);
@@ -989,8 +998,8 @@ int main(int argc, char *argv[])
 
         gettimeofday(&timestamp, NULL);
         ltime = localtime(&timestamp.tv_sec);
-        fprintf(f, "%d-%02d-%02d %02d:%02d,", ltime->tm_year+1900, ltime->tm_mon+1,
-                ltime->tm_mday, ltime->tm_hour, ltime->tm_min);
+        fprintf(f, "%d-%02d-%02d %02d:%02d:%02d,", ltime->tm_year+1900, ltime->tm_mon+1,
+                ltime->tm_mday, ltime->tm_hour, ltime->tm_min, ltime->tm_sec);
         energyNow = 0;
 
         // Try every command on the inverter and save the result in a CSV file.
