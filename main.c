@@ -619,7 +619,15 @@ static int getNumeric(int fd, unsigned char number, unsigned char cmd, float *f)
     if ((exponent < -3) || (exponent > 10))
         return 0;
 
-    *f = value * powf(10, exponent);
+    //only the temperature command returns a signed value
+    if (cmd != 0x31)
+    {
+        *f = (unsigned short)value * powf(10, exponent);
+    }
+    else
+    {
+        *f = value * powf(10, exponent);
+    }
 
     return 1;
 }
